@@ -31,14 +31,15 @@ module.exports = (robot) ->
     robot.http(url)
       .get() (err, res, body) ->
         lang_list = body.split(/<\/?pre.*>/)[1].split("\n")
-        challenge_lang = []
+        challenge_lang_list = []
         if count > lang_list.length
           count = lang_list.length
         for i in [1..count]
           index = msg.random([0..lang_list.length-1])
-          challenge_lang.push(lang_list[index])
+          challenge_lang_list.push(lang_list[index])
           lang_list.splice(index, 1)
-        print_message(n, challenge_lang, msg)
+        print_message(n, challenge_lang_list, msg)
+
   print_message = (n, lang_list, msg) ->
     msg.send 'CodeIQ名物'
     msg.send '第' + n + '回デスマコロシアム'
