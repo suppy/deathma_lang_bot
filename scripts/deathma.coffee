@@ -12,23 +12,23 @@ module.exports = (robot) ->
   robot.respond /deathma (\d+) (\d+)$/i, (msg) ->
     n = msg.match[1]
     count = msg.match[2]
-    total_url = []
     # 『第n回デスマコロシアム』問題 集計報告 のトップページ
-    total_url[8] = "http://tbpgr.hatenablog.com/entry/20141129/1417276802"
-    total_url[7] = "http://tbpgr.hatenablog.com/entry/20140906/1410014282"
-    total_url[6] = "http://tbpgr.hatenablog.com/entry/20140726/1406388500"
-    total_url[5] = "http://tbpgr.hatenablog.com/entry/20140615/1402853082"
-    total_url[4] = "http://tbpgr.hatenablog.com/entry/20140525/1401011965"
-    total_url[3] = "http://tbpgr.hatenablog.com/entry/20140429/1398790099"
-    total_url[2] = "http://tbpgr.hatenablog.com/entry/20140405/1396714344"
-    total_url[1] = "http://tbpgr.hatenablog.com/entry/20140318/1395147131"
+    robot.brain.set 'deathma8', "http://tbpgr.hatenablog.com/entry/20141129/1417276802"
+    robot.brain.set 'deathma7', "http://tbpgr.hatenablog.com/entry/20140906/1410014282"
+    robot.brain.set 'deathma6', "http://tbpgr.hatenablog.com/entry/20140726/1406388500"
+    robot.brain.set 'deathma5', "http://tbpgr.hatenablog.com/entry/20140615/1402853082"
+    robot.brain.set 'deathma4', "http://tbpgr.hatenablog.com/entry/20140525/1401011965"
+    robot.brain.set 'deathma3', "http://tbpgr.hatenablog.com/entry/20140429/1398790099"
+    robot.brain.set 'deathma2', "http://tbpgr.hatenablog.com/entry/20140405/1396714344"
+    robot.brain.set 'deathma1', "http://tbpgr.hatenablog.com/entry/20140318/1395147131"
+    url = robot.brain.get('deathma' + n)
     msg.send 'CodeIQ名物'
-    msg.send '第' + n.toString() + '回デスマコロシアム'
-    if n >= total_url.length
+    msg.send '第' + n + '回デスマコロシアム'
+    if url is null
       msg.send 'まだ開催されていません'
     else
       # 『第n回デスマコロシアム』問題 集計報告 のトップページを取得します
-      robot.http(total_url[n])
+      robot.http(url)
       .get() (err, res, body) ->
         msg.send '今日挑戦するプログラム言語は'
         lang_list = body.split(/<pre class="code" data-lang="" data-unlink>|<\/pre>/)[1].split("\n")
