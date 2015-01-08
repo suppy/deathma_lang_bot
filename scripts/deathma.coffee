@@ -5,11 +5,13 @@
 #
 # Commands:
 #   deathma n count - 第 n 回で挑戦者０名の言語を count 個ランダムに出力する
+#   deathma         - 最新回で挑戦者０名の言語をランダムに出力する
 #
 # Author:
 #   suppy193
 
 module.exports = (robot) ->
+  latest = 8
   # 『第n回デスマコロシアム』問題 集計報告 のトップページ
   robot.brain.set 'deathma8', "http://tbpgr.hatenablog.com/entry/20141129/1417276802"
   robot.brain.set 'deathma7', "http://tbpgr.hatenablog.com/entry/20140906/1410014282"
@@ -20,9 +22,13 @@ module.exports = (robot) ->
   robot.brain.set 'deathma2', "http://tbpgr.hatenablog.com/entry/20140405/1396714344"
   robot.brain.set 'deathma1', "http://tbpgr.hatenablog.com/entry/20140318/1395147131"
 
-  robot.respond /deathma (\d+) (\d+)$/i, (msg) ->
+  robot.respond /deathma *(\d+)? *(\d+)? *$/i, (msg) ->
     n = msg.match[1]
-    count = msg.match[2]
+    if n?
+      count = msg.match[2]
+    else
+      n = latest
+      count = 1
     url = robot.brain.get('deathma' + n)
     if url is null
       msg.send 'まだ開催されていません'
