@@ -24,15 +24,12 @@ module.exports = (robot) ->
     n = msg.match[1]
     count = msg.match[2]
     url = robot.brain.get('deathma' + n)
-    msg.send 'CodeIQ名物'
-    msg.send '第' + n + '回デスマコロシアム'
     if url is null
       msg.send 'まだ開催されていません'
       return
     # 『第n回デスマコロシアム』問題 集計報告 のトップページを取得します
     robot.http(url)
       .get() (err, res, body) ->
-        msg.send '今日挑戦するプログラム言語は'
         lang_list = body.split(/<\/?pre.*>/)[1].split("\n")
         challenge_lang = []
         if count > lang_list.length
@@ -41,8 +38,13 @@ module.exports = (robot) ->
           index = msg.random([0..lang_list.length-1])
           challenge_lang.push(lang_list[index])
           lang_list.splice(index, 1)
-        msg.send challenge_lang.join('と')
-        msg.send 'にしましょう！'
+        print_message(n, challenge_lang, msg)
+  print_message = (n, lang_list, msg) ->
+    msg.send 'CodeIQ名物'
+    msg.send '第' + n + '回デスマコロシアム'
+    msg.send '今日挑戦するプログラム言語は'
+    msg.send lang_list.join('と')
+    msg.send 'にしましょう！'
 # Examples:
 #Hubot> hubot deathma 8 3
 #Hubot> CodeIQ名物
