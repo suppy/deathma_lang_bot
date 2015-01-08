@@ -14,14 +14,14 @@ module.exports = (robot) ->
     count = msg.match[2]
     total_url = []
     # 『第n回デスマコロシアム』問題 集計報告 のトップページ
-    total_url[8] = "http://d.hatena.ne.jp/tbpg/20141129/1417276802"
-    total_url[7] = "http://d.hatena.ne.jp/tbpg/20140906/1410014268"
-    total_url[6] = "http://d.hatena.ne.jp/tbpg/20140726/1406388500"
-    total_url[5] = "http://d.hatena.ne.jp/tbpg/20140615/1402853082"
-    total_url[4] = "http://d.hatena.ne.jp/tbpg/20140525/1401011965"
-    total_url[3] = "http://d.hatena.ne.jp/tbpg/20140429/1398790099"
-    total_url[2] = "http://d.hatena.ne.jp/tbpg/20140405/1396714344"
-    total_url[1] = "http://d.hatena.ne.jp/tbpg/20140318/1395147131"
+    total_url[8] = "http://tbpgr.hatenablog.com/entry/20141129/1417276802"
+    total_url[7] = "http://tbpgr.hatenablog.com/entry/20140906/1410014282"
+    total_url[6] = "http://tbpgr.hatenablog.com/entry/20140726/1406388500"
+    total_url[5] = "http://tbpgr.hatenablog.com/entry/20140615/1402853082"
+    total_url[4] = "http://tbpgr.hatenablog.com/entry/20140525/1401011965"
+    total_url[3] = "http://tbpgr.hatenablog.com/entry/20140429/1398790099"
+    total_url[2] = "http://tbpgr.hatenablog.com/entry/20140405/1396714344"
+    total_url[1] = "http://tbpgr.hatenablog.com/entry/20140318/1395147131"
     msg.send 'CodeIQ名物'
     msg.send '第' + n.toString() + '回デスマコロシアム'
     if n >= total_url.length
@@ -31,7 +31,8 @@ module.exports = (robot) ->
       robot.http(total_url[n])
       .get() (err, res, body) ->
         msg.send '今日挑戦するプログラム言語は'
-        lang_list = body.split(/\n*<\/*pre>\n*/)[1].split("\n")
+        lang_list = body.split(/<pre class="code" data-lang="" data-unlink>|<\/pre>/)[1].split("\n")
+        #msg.send lang_list
         challenge_lang = []
         if count > lang_list.length
           count = lang_list.length
