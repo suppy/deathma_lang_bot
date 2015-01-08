@@ -31,8 +31,7 @@ module.exports = (robot) ->
       robot.http(url)
       .get() (err, res, body) ->
         msg.send '今日挑戦するプログラム言語は'
-        lang_list = body.split(/<pre class="code" data-lang="" data-unlink>|<\/pre>/)[1].split("\n")
-        #msg.send lang_list
+        lang_list = body.split(/<\/?pre.*>/)[1].split("\n")
         challenge_lang = []
         if count > lang_list.length
           count = lang_list.length
