@@ -76,8 +76,14 @@ module.exports = (robot) ->
 #Hubot> 今日挑戦するプログラム言語は
 #Hubot> bcとCLIPS
 #Hubot> にしましょう！
-#Hubot> hubot deathma 9 3
+#Hubot> hubot deathma
 #Hubot> CodeIQ名物
 #Hubot> 第9回デスマコロシアム
+#Hubot> 今日挑戦するプログラム言語は
+#Hubot> Nemerle
+#Hubot> にしましょう！
+#Hubot> hubot deathma 10 2
+#Hubot> CodeIQ名物
+#Hubot> 第10回デスマコロシアム
 #Hubot> まだ開催されていません
 
