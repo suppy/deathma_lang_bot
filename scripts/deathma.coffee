@@ -11,8 +11,9 @@
 #   suppy193
 
 module.exports = (robot) ->
-  latest = 8
+  latest = 9 
   # 『第n回デスマコロシアム』問題 集計報告 のトップページ
+  robot.brain.set 'deathma9', "http://tbpgr.hatenablog.com/entry/20141223/1419335771"
   robot.brain.set 'deathma8', "http://tbpgr.hatenablog.com/entry/20141129/1417276802"
   robot.brain.set 'deathma7', "http://tbpgr.hatenablog.com/entry/20140906/1410014282"
   robot.brain.set 'deathma6', "http://tbpgr.hatenablog.com/entry/20140726/1406388500"
