@@ -30,6 +30,7 @@ module.exports = (robot) ->
     else
       n = latest
       count = 1
+    print_title(n, msg)
     url = robot.brain.get('deathma' + n)
     if url is null
       msg.send 'まだ開催されていません'
@@ -45,14 +46,17 @@ module.exports = (robot) ->
           index = msg.random([0..lang_list.length-1])
           challenge_lang_list.push(lang_list[index])
           lang_list.splice(index, 1)
-        print_message(n, challenge_lang_list, msg)
+        print_message(challenge_lang_list, msg)
 
-  print_message = (n, lang_list, msg) ->
+  print_title = (n, msg) ->
     msg.send 'CodeIQ名物'
     msg.send '第' + n + '回デスマコロシアム'
+
+  print_message = (lang_list, msg) ->
     msg.send '今日挑戦するプログラム言語は'
     msg.send lang_list.join('と')
     msg.send 'にしましょう！'
+
 # Examples:
 #Hubot> hubot deathma 8 3
 #Hubot> CodeIQ名物
